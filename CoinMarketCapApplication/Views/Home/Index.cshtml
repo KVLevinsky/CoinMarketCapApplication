@@ -1,0 +1,43 @@
+﻿@model CoinMarketCapApplication.Models.CoinDataModel //CoinMarketCapCache
+@inject CoinMarketCapApplication.Services.ICoinMarketCapCache cache
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <!--p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p-->
+</div>
+<meta http-equiv="refresh" content="10" />
+
+@using (Html.BeginForm("Index", "Home")) {
+    <table class="text-body">
+        <thead>
+            <tr>
+                <td>Логотип</td>
+                <td>Название</td>
+                <td>Символ</td>
+                <td>Цена (USD)</td>
+                <td>Изменение за 1 час</td>
+                <td>Изменение за 24 часа</td>
+                <td>Капитализация (USD)</td>
+                <td>Обновлено</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cache.Data) {
+                <tr>
+                    <td><img alt="Logo" src="@item.LogoURL" /></td>
+                    <td>@Html.DisplayFor(m => item.Name)</td>
+                    <td>@Html.DisplayFor(m => item.Symbol)</td>
+                    <td class="right">@Html.DisplayFor(m => item.Price)</td>
+                    <td class="right">@Html.DisplayFor(m => item.Change1H)</td>
+                    <td class="right">@Html.DisplayFor(m => item.Change24h)</td>
+                    <td class="right">@Html.DisplayFor(m => item.Capitalization)</td>
+                    <td>@Html.DisplayFor(m => item.LastUpdatedLocalTime)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
