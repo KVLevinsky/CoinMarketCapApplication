@@ -48,7 +48,7 @@ namespace CoinMarketCapApplication.Services {
                 _cache.AddData(response);
 
                 List<string> ids = _cache.GetEmptyLogoIds();
-                if (ids.Count > 0) {
+                if (ids?.Count > 0) {
                     queryString = HttpUtility.ParseQueryString(string.Empty);
                     queryString["id"] = string.Join(',', ids);
 
