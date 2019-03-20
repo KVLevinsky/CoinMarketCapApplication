@@ -52,10 +52,10 @@ namespace CoinMarketCapApplication.Services {
                     queryString = HttpUtility.ParseQueryString(string.Empty);
                     queryString["id"] = string.Join(',', ids);
 
-                    string auxresponse = _queryCoinMarketCapAPI("pro-api.coinmarketcap.com", "/v1/cryptocurrency/info", queryString.ToString());
-                    dynamic parsedAuxResponse = JsonConvert.DeserializeObject(auxresponse);
+                    string auxResponse = _queryCoinMarketCapAPI("pro-api.coinmarketcap.com", "/v1/cryptocurrency/info", queryString.ToString());
+                    dynamic parsedAuxResponse = JsonConvert.DeserializeObject(auxResponse);
                     if (parsedAuxResponse.status.error_code == 0) {
-                        _cache.AddAuxData(auxresponse);
+                        _cache.AddAuxData(auxResponse);
                     }
                 }
             } else {
